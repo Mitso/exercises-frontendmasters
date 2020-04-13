@@ -1,2 +1,2 @@
-# fed-masters-exercises
+# Fed Masters Exercises
 Exercises
