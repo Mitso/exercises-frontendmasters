@@ -4,126 +4,126 @@
 	Will Sentance 
 	https://frontendmasters.com/courses/javascript-hard-parts-v2/
 	http://csbin.io/callbacks
+*/
+
+// Challenge 1
+function addTwo(num) {
+	return num + 2;
+}
+// Challenge 1
+function addTwo(num) {
+	return num + 2;
+}
+// To check if you've completed it, uncomment these console.logs!
+//console.log(addTwo(3));
+//console.log(addTwo(10));
 
 
-	// Challenge 1
-	function addTwo(num) {
-		return num + 2;
-	}
-	// Challenge 1
-	function addTwo(num) {
-		return num + 2;
-	}
-	// To check if you've completed it, uncomment these console.logs!
-	//console.log(addTwo(3));
-	//console.log(addTwo(10));
+// Challenge 2
+function addS(word) {
+	return word + 's';
+}
+// uncomment these to check your work
+//console.log(addS('pizza'));
+//console.log(addS('bagel'));
 
 
-	// Challenge 2
-	function addS(word) {
-		return word + 's';
-	}
-	// uncomment these to check your work
-	//console.log(addS('pizza'));
-	//console.log(addS('bagel'));
+// Challenge 3
+function map(array, callback) {
+  const newArrayResult = [];
+	for(let i = 0; i < array.length; i++) {
+    newArrayResult.push(callback(array[i]));
+  }
+  return newArrayResult
+}
+// console.log(map([1, 2, 3], addTwo));
 
 
-	// Challenge 3
-	function map(array, callback) {
-	  const newArrayResult = [];
-		for(let i = 0; i < array.length; i++) {
-	    newArrayResult.push(callback(array[i]));
-	  }
-	  return newArrayResult
-	}
-	// console.log(map([1, 2, 3], addTwo));
+// Challenge 4
+function forEach(array, callback) {
+  for(let i = 0; i < array.length; i++) {
+    callback(array[i]);
+  }
+}
+let alphabet = '';
+const letters = ['a', 'b', 'c', 'd'];
+forEach(letters, function(char) {
+  alphabet += char;
+});
+//console.log(alphabet); 
+
+// see for yourself if your forEach works!
 
 
-	// Challenge 4
-	function forEach(array, callback) {
-	  for(let i = 0; i < array.length; i++) {
-	    callback(array[i]);
-	  }
-	}
-	let alphabet = '';
-	const letters = ['a', 'b', 'c', 'd'];
-	forEach(letters, function(char) {
-	  alphabet += char;
+// Challenge 5
+function mapWith(array, callback) {
+	let newResult = [];
+	forEach(array,function(e){
+		newResult.push(callback(e));
 	});
-	//console.log(alphabet); 
+	return newResult;
+}
+//console.log(mapWith([1,2,3],addTwo));
 
-	// see for yourself if your forEach works!
 
 
-	// Challenge 5
-	function mapWith(array, callback) {
-		let newResult = [];
-		forEach(array,function(e){
-			newResult.push(callback(e));
+// Challenge 6
+const add = function(a, b) {
+  return a + b;
+}
+function reduce(array, callback, initialValue) {
+	let accum = initialValue;
+	for(let i = 0; i < array.length; i++) {
+		accum = callback(accum, array[i]);
+	}
+	return accum;
+}
+//console.log(reduce([1,2,3],add,0));
+
+
+// Challenge 7
+function intersection(...allArrays) {
+	const all = [];
+	let first;
+	for(let i = 0; i < allArrays.length; i++) {
+		first = allArrays[0];
+		all.push(allArrays.pop(1))
+	}
+	return first.filter(function(v) {
+		return all.every(function(arr){
+			return arr.includes(v);
 		});
-		return newResult;
-	}
-	//console.log(mapWith([1,2,3],addTwo));
+	});
+}
+//console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
+// should log: [5, 15]
 
 
+// Challenge 8
+function union(...allArrays) {
+	const all = [];
 
-	// Challenge 6
-	const add = function(a, b) {
-	  return a + b;
-	}
-	function reduce(array, callback, initialValue) {
-		let accum = initialValue;
-		for(let i = 0; i < array.length; i++) {
-			accum = callback(accum, array[i]);
+	for(let i = 0; i < allArrays.length; i++){
+		for(let j = 0; j < allArrays[i].length; j++) {
+			all.push(allArrays[i][j]);
 		}
-		return accum;
 	}
-	//console.log(reduce([1,2,3],add,0));
-
-
-	// Challenge 7
-	function intersection(...allArrays) {
-		const all = [];
-		let first;
-		for(let i = 0; i < allArrays.length; i++) {
-			first = allArrays[0];
-			all.push(allArrays.pop(1))
+	const results = all.reduce(function(acc,curr) {
+		if(acc.indexOf(curr) === -1) {
+			acc.push(curr);
 		}
-		return first.filter(function(v) {
-			return all.every(function(arr){
-				return arr.includes(v);
-			});
-		});
-	}
-	//console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
-	// should log: [5, 15]
+		return acc;
+	},[]);
+	return results;
+	
+}
+
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+// should log: [5, 10, 15, 88, 1, 7, 100]
 
 
-	// Challenge 8
-	function union(...allArrays) {
-		const all = [];
-
-		for(let i = 0; i < allArrays.length; i++){
-			for(let j = 0; j < allArrays[i].length; j++) {
-				all.push(allArrays[i][j]);
-			}
-		}
-		const results = all.reduce(function(acc,curr) {
-			if(acc.indexOf(curr) === -1) {
-				acc.push(curr);
-			}
-			return acc;
-		},[]);
-		return results;
-		
-	}
-
-	console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
-	// should log: [5, 10, 15, 88, 1, 7, 100]
-
-
-	------------------------------------------------------------------------------
-
+//------------------------------------------------------------------------------
+/*
 	// Challenge 9
 	function objOfMatches(array1, array2, callback) {
 
@@ -160,7 +160,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const isOdd = function(num) { return num % 2 === 1; };
 	// console.log(majority([1, 2, 3, 4, 5], isOdd)); // should log: true
 	// console.log(majority([2, 3, 4, 5], isOdd)); // should log: false
@@ -171,7 +171,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const startsWithS = function(str) { return str[0] === 's' || str[0] === 'S'; };
 	// console.log(prioritize(['curb', 'rickandmorty', 'seinfeld', 'sunny', 'friends'], startsWithS)); // should log:
 	['seinfeld', 'sunny', 'curb', 'rickandmorty', 'friends']
@@ -182,7 +182,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// console.log(countBy([1, 2, 3, 4, 5], function(num) {
 	// if (num % 2 === 0) return 'even';
 	// else return 'odd';
@@ -194,7 +194,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const decimals = [1.3, 2.1, 2.4];
 	// const floored = function(num) { return Math.floor(num); };
 	// console.log(groupBy(decimals, floored)); // should log: { 1: [1.3], 2: [2.1, 2.4] }
@@ -205,7 +205,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const sunny = { mac: 'priest', dennis: 'calculating', charlie: 'birdlaw', dee: 'bird', frank: 'warthog' };
 	// const startsWithBird = function(str) { return str.slice(0, 4).toLowerCase() === 'bird'; };
 	// console.log(goodKeys(sunny, startsWithBird)); // should log: ['charlie', 'dee']
@@ -216,7 +216,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const multBy3 = n => n * 3;
 	// const divBy4 = n => n / 4;
 	// const subtract5 = n => n - 5;
@@ -230,7 +230,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const startingObj = {};
 	// startingObj[6] = 3;
 	// startingObj[2] = 1;
@@ -238,13 +238,12 @@
 	// const half = n => n / 2;
 	// console.log(objFilter(startingObj, half)); // should log: { 2: 1, 6: 3 }
 
-
 	// Challenge 19
 	function rating(arrOfFuncs, value) {
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const isEven = n => n % 2 === 0;
 	// const greaterThanFour = n => n > 4;
 	// const isSquare = n => Math.sqrt(n) % 1 === 0;
@@ -259,7 +258,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const capitalize = str => str.toUpperCase();
 	// const addLowerCase = str => str + str.toLowerCase();
 	// const repeat = str => str + str;
@@ -272,7 +271,7 @@
 
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const groupOfFuncs = {};
 	// groupOfFuncs.double = n => n * 2;
 	// groupOfFuncs.addTen = n => n + 10;
@@ -299,7 +298,7 @@
 	  return num * 3;
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// console.log(combineOperations(0, [add100, divByFive, multiplyByThree])); // Should output 60 -->
 	// console.log(combineOperations(0, [divByFive, multiplyFive, addTen])); // Should output 10
 
@@ -316,7 +315,7 @@
 	  return (num % 2 !== 0);
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// console.log(myFunc(numbers, isOdd)); // Output should be 1
 	// console.log(myFunc(evens, isOdd)); // Output should be -1
 
@@ -332,7 +331,7 @@
 	  sum += num;
 	}
 
-	// /*** Uncomment these to check your work! ***/
+	// Uncomment these to check your work!
 	// const nums = [1, 2, 3];
 	// myForEach(nums, addToSum);
 	// console.log(sum); // Should output 6
