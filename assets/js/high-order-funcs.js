@@ -1,7 +1,6 @@
 "use strict";
-
 /*
-	Will Sentance 
+	Will Sentance
 	https://frontendmasters.com/courses/javascript-hard-parts-v2/
 	http://csbin.io/callbacks
 */
@@ -50,7 +49,7 @@ const letters = ['a', 'b', 'c', 'd'];
 forEach(letters, function(char) {
   alphabet += char;
 });
-//console.log(alphabet); 
+//console.log(alphabet);
 
 // see for yourself if your forEach works!
 
@@ -78,25 +77,30 @@ function reduce(array, callback, initialValue) {
 	}
 	return accum;
 }
-//console.log(reduce([1,2,3],add,0));
+//console.log(reduce([1,2,3,4,5,6,7,8,9,10],add,0));
 
 
 // Challenge 7
-function intersection(...allArrays) {
-	const all = [];
-	let first;
-	for(let i = 0; i < allArrays.length; i++) {
-		first = allArrays[0];
-		all.push(allArrays.pop(1))
-	}
-	return first.filter(function(v) {
-		return all.every(function(arr){
-			return arr.includes(v);
-		});
-	});
+const intSetA = [6,1,3,7,2,5,10,8,9,4,11,12,13,14,15,16,17,18,19,20,11,4,5,90];
+const intSetB = [88,2,8,10,4,12,14,6,18,20,22,32,56,16,10];
+function intersect(...n) {
+  const restOfArray = [];
+  let firstArray;
+  let intersectSet;
+  for(let i = 0; i < n.length; i++) {
+    firstArray = n[0];
+    restOfArray.push(n.pop(1));
+  }
+  intersectSet = firstArray.filter(function(v){
+    const resulFiltered = restOfArray.every(function(arr){
+      return arr.includes(v);
+    });
+    return resulFiltered;
+  });
+  return intersectSet.sort((a, b) => a - b).filter((item, index) => intersectSet.indexOf(item) === index);
 }
-//console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
-// should log: [5, 15]
+const results = intersect(intSetA, intSetB);
+console.log(results);
 
 
 // Challenge 8
@@ -115,10 +119,10 @@ function union(...allArrays) {
 		return acc;
 	},[]);
 	return results;
-	
+
 }
 
-console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+//console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
 
 
